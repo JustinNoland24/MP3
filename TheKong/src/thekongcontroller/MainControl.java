@@ -54,9 +54,10 @@ public class MainControl extends Application {
         CommandView2 command = new CommandView2();
         SpriteDataCollection sprite = IOController.readSpriteConfigFile(spriteConfigFileName);
         this.playareaview = new PlayAreaView(sprite, levelCollection.getLevel(0));
+     
         GameView2 game = new GameView2(status, playareaview, command);
         Scene scene = new Scene(game);
-        animation = new AnimationController(playareaview);
+        animation = new AnimationController(this.playareaview);
 
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
@@ -68,7 +69,7 @@ public class MainControl extends Application {
 
                         animation.jump = true;
                         animation.gravity = 12.5;
-
+                        
                         break;
 
                     case DOWN:
@@ -131,8 +132,13 @@ public class MainControl extends Application {
         stage.setScene(scene);
         stage.show();
 
-        command.getStartButton().setOnAction(event -> {
+        command.getStartButton().setOnAction(event -> { 
+            animation.rolling=true;
+            animation.princesspace=true;
+            animation.barrelanimate=true;
+            animation.konganimate=true;
             animation.start();
+            
 
         });
 
